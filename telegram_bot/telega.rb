@@ -48,10 +48,9 @@ class Telega
 
   def in_rp_geolakacia
     [
-        Telegram::Bot::Types::KeyboardButton.new(text: 'Show me your location', request_location: true)
+        Telegram::Bot::Types::KeyboardButton.new(text: 'Нажми что-бы дать геолакацию', request_location: true)
     ]
   end
-
 
   def callback_logic(message, bot)
     if message.data == "nazvanie"
@@ -68,10 +67,7 @@ class Telega
   end
 
   def message_logic(message, bot)
-    if !message.location.latitude.nil? or !message.location.longitude.nil?
-      p message.location
-      p message.location.latitude
-      p message.location.longitude
+    if message.location
       bot.api.send_message(chat_id: message.chat.id, text: Weather.current_by(message.location.latitude, message.location.longitude).pretty, reply_markup: inline_markup(in_kb))
     elsif message.text == '/start'
       bot.api.send_message(chat_id: message.chat.id, text: "Здраствуй #{message.from.first_name} Это Телеграм бот погоды", reply_markup: inline_markup(in_kb))
