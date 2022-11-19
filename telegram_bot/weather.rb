@@ -12,8 +12,11 @@ class Weather
     CurrentDay.new(data)
   end
 
-  def self.current_by(location)
-
+  def self.current_by(lat, lon)
+    response = HTTP.get("http://api.weatherapi.com/v1/current.json?key=#{API_KEY}&q=#{lat},#{lon}&aqi=no").to_s
+    p response
+    data = JSON.parse(response)
+    CurrentDay.new(data)
   end
 
   # def self.tree_days(query)

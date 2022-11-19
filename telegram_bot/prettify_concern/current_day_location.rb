@@ -1,4 +1,4 @@
-class CurrentDay
+class CurrentDayLocation
   include Prettify
 
   def initialize(data)
@@ -6,7 +6,6 @@ class CurrentDay
   end
 
   def to_s
-    p @data
     s = "Город: #{@data["location"]["name"]}\n"
     s += "Температура c: #{@data["current"]["temp_c"]}\n"
     s += "Температура f: #{@data["current"]["temp_f"]}\n"
